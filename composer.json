@@ -1,9 +1,17 @@
 {
     "name": "ericli1018/laravel-kendo-ui-datasource",
-    "description": "",
+    "description": "Kendo UI datasource for Laravel",
+    "license": "MIT",
+    "keywords": [
+        "kendo",
+        "laravel",
+        "datasource"
+    ],
+    "homepage": "https://github.com/ericli1018/laravel-kendo-ui-datasource",
     "authors": [
         {
-            "name": "EricLi"
+            "name": "EricLi",
+            "email": "ericli1018@yahoo.com.tw"
         }
     ],
     "require": {
@@ -16,5 +24,6 @@
             "LaravelKendoUiDatasource": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
