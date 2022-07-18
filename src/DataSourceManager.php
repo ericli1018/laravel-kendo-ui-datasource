@@ -1,4 +1,5 @@
-<?php namespace LaravelKendoUiDatasource;
+<?php
+namespace ericli101\LaravelKendoUiDatasource;
 
 use \Illuminate\Foundation\Application;
 
