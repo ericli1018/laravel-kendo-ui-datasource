@@ -1,0 +1,20 @@
+{
+    "name": "ericli1018/laravel-kendo-ui-datasource",
+    "description": "",
+    "authors": [
+        {
+            "name": "EricLi"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "mockery/mockery": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "LaravelKendoUiDatasource": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
