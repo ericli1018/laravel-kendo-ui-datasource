@@ -42,7 +42,7 @@ class DataSource
 		$this->app = $app;
 		$this->input = $input;
 		$this->columns = $columns;
-		$this->table_name = $table_name === null ? '' : $table_name . '.';
+		$this->table_name = $table_name === null ? '' : "`$table_name`" . '.';
 		$this->sortKey = config('laravel-kendo-ui-datasource.sortKey');
 		$this->filterKey = config('laravel-kendo-ui-datasource.filterKey');
 	}
@@ -50,30 +50,30 @@ class DataSource
 	private function sort($query, $d)
 	{
 		if( ! is_array($d))
-			$this->app->abort(400);
+			$this->app->abort(400, 'sort is not array');
 
 		foreach($d as $f)
 		{
 			if( ! is_array($f))
-				$this->app->abort(400);
+				$this->app->abort(400, 'sort item is not object.');
 
 			if( ! isset($this->columns[$f['field']]))
-				$this->app->abort(400);
+				$this->app->abort(400, $f['field'] . ' field not set.');
 
 			if( ! isset($f['dir']) or ! in_array($f['dir'], ['asc', 'desc'], true))
-				$this->app->abort(400);
+				$this->app->abort(400, $f['field'] . ' field sort dir wrong.');
 			
 			$field = null;
 			if (is_array($this->columns[$f['field']])) 
 			{
 				if (count($this->columns[$f['field']]) > 1) // table name
-					$field = $this->columns[$f['field']][1] . '.' . $f['field'];
+					$field = '`' . $this->columns[$f['field']][1] . '`.`' . $f['field'] . '`';
 				else 
-					$field = $this->table_name . $f['field'];
+					$field = $this->table_name . '`' . $f['field'] . '`';
 			} 
 			else 
 			{
-				$field = $this->table_name . $f['field'];
+				$field = $this->table_name . '`' . $f['field'] . '`';
 			}
 			$query->orderBy(DB::raw($field), $f['dir']);
 		}
@@ -82,7 +82,7 @@ class DataSource
 	private function filterField($query, $d, $logic)
 	{
 		if( ! isset($d['field']) or ! isset($this->columns[$d['field']]))
-			$this->app->abort(400);
+			$this->app->abort(400, $d['field'] . ' field not set.');
 
 		$columnType = null;
 		$columnName = null; 
@@ -93,23 +93,23 @@ class DataSource
 				$columnType = $this->columns[$d['field']][0];
 
 				if (count($this->columns[$d['field']]) > 1) 
-					$columnName = $this->columns[$d['field']][1] . '.' . $d['field'];
+					$columnName = '`' . $this->columns[$d['field']][1] . '`.`' . $d['field'] . '`';
 				else
-					$columnName = $this->table_name . $d['field'];
+					$columnName = $this->table_name . '`' . $d['field'] . '`';
 			}
 			else
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field not set.');
 		} 
 		else 
 		{
 			$columnType = $this->columns[$d['field']];
-			$columnName = $this->table_name . $d['field'];
+			$columnName = $this->table_name . '`' . $d['field'] . '`';
 		}
 
 		if($columnType === 'string')
 		{
 			if( ! isset($d['operator']) or ! isset($this->stringOps[$d['operator']]))
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field not set operator.');
 
 				$value = "";
 				if ('isnull' == $d['operator']) {
@@ -125,7 +125,7 @@ class DataSource
 				} else {
 					if ('isempty' != $d['operator'] && 'isnotempty' != $d['operator']) {
 						if( ! isset($d['value']) or ! is_string($d['value']))
-							$this->app->abort(400);
+							$this->app->abort(400, $d['field'] . ' field not set value.');
 					}
 	
 					$value = $d['value'];
@@ -142,7 +142,7 @@ class DataSource
 		else if($columnType === 'number')
 		{
 			if( ! isset($d['operator']) or ! isset($this->numberOps[$d['operator']]))
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field not set operator.');
 
 			if ('isnull' == $d['operator']) {
 				$query->whereNull(DB::raw($columnName));
@@ -150,7 +150,7 @@ class DataSource
 				$query->whereNotNull(DB::raw($columnName));
 			} else {
 				if( ! isset($d['value']) or ! is_numeric($d['value']))
-					$this->app->abort(400);
+					$this->app->abort(400, $d['field'] . ' field not set value.');
 
 				$query->where(DB::raw($columnName), $this->numberOps[$d['operator']], $d['value'], $logic);
 			}
@@ -158,24 +158,24 @@ class DataSource
 		else if($columnType === 'boolean')
 		{
 			if( ! isset($d['operator']))
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field not set operator.');
 
 			if( ! isset($d['value']))
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field not set value.');
 
 			$query->where(DB::raw($columnName), $d['value'] === 'true' ? '!=' : '=', 0, $logic);		
 		}
 		else if($columnType === 'date')
 		{
 			if( ! isset($d['operator']) or ! isset($this->numberOps[$d['operator']]))
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field not set operator.');
 
 			try {
 				$value = new \DateTime($d['value']);
 			}
 			catch(\Exception $e)
 			{
-				$this->app->abort(400);
+				$this->app->abort(400, $d['field'] . ' field value is not datetime.');
 			}
 			if ('isnull' == $d['operator']) {
                 $query->whereNull(DB::raw($columnName));
@@ -186,7 +186,7 @@ class DataSource
             }
 		}
 		else {
-			$this->app->abort(500);
+			$this->app->abort(500, $d['field'] . ' field type not support.');
 		}
 	}
 
@@ -195,15 +195,15 @@ class DataSource
 		$filter_r = function($query, $d, $depth, $logic) use(&$filter_r)
 		{
 			if($depth >= 32)
-				$this->app->abort(400);
+				$this->app->abort(400, 'filter recursive limit(depth=32).');
 
 			if( ! is_array($d))
-				$this->app->abort(400);
+				$this->app->abort(400, 'filter input is not object.');
 
 			if(isset($d['filters']) and is_array($d['filters']))
 			{
 				if( ! isset($d['logic']) or ! in_array($d['logic'], ['and', 'or'], true))
-					$this->app->abort(400);
+					$this->app->abort(400, 'filter logic only support "and" or "or".');
 
 				$query->where(function($query) use ($d, $depth, $filter_r)
 				{
