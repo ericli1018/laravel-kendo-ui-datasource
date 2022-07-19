@@ -1,8 +1,8 @@
 <?php
 namespace Ericli1018\LaravelKendoUiDatasource;
 
-use \Illuminate\Foundation\Application;
-use \Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\DB;
 
 class DataSource
 {

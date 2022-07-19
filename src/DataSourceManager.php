@@ -1,7 +1,7 @@
 <?php
 namespace Ericli1018\LaravelKendoUiDatasource;
 
-use \Illuminate\Foundation\Application;
+use Illuminate\Foundation\Application;
 
 class DataSourceManager
 {

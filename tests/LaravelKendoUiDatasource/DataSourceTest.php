@@ -83,7 +83,7 @@ class DataSourceTest extends PHPUnit_Framework_TestCase
 
 		$columns = ['bar' => 'string', 'baz' => 'number'];
 
-		$datasource = new ericli1018\LaravelKendoUiDatasource\DataSource($this->getApp(), $input, $columns);
+		$datasource = new Ericli1018\LaravelKendoUiDatasource\DataSource($this->getApp(), $input, $columns, null);
 		$total = $datasource->execute($query);
 		$this->assertEquals(3, $total);
 	}
