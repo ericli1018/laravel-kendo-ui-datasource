@@ -3,9 +3,9 @@
     "description": "Kendo UI datasource for Laravel",
     "license": "MIT",
     "keywords": [
-        "kendo",
-        "laravel",
-        "datasource"
+        "Kendo",
+        "Laravel",
+        "Datasource"
     ],
     "homepage": "https://github.com/ericli1018/laravel-kendo-ui-datasource",
     "authors": [
@@ -15,14 +15,23 @@
         }
     ],
     "require": {
+        "php": ">=7.4.0",
+        "laravel/framework": ">=7.0"
     },
     "require-dev": {
         "mockery/mockery": "dev-master"
     },
     "autoload": {
         "psr-0": {
-            "LaravelKendoUiDatasource": "src/"
+            "Ericli1018\\LaravelKendoUiDatasource": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ericli1018\\LaravelKendoUiDatasource\\LaravelKendoUiDatasourceServiceProvider"
+            ]
+       }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

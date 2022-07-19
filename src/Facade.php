@@ -1,5 +1,5 @@
 <?php
-namespace ericli101\LaravelKendoUiDatasource;
+namespace Ericli1018\LaravelKendoUiDatasource;
 
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
 

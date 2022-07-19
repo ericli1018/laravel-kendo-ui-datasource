@@ -13,7 +13,7 @@ Server side Kendo UI DataSource implementation for Laravel
 To get the latest version simply require it in your `composer.json` file.
 
 ~~~
-"ericli1018/laravel-kendo-ui-datasource": "master"
+"ericli1018/laravel-kendo-ui-datasource": "main-dev"
 ~~~
 
 You can register the facade in the `aliases` key of your `app/config/app.php` file.
@@ -21,7 +21,7 @@ You can register the facade in the `aliases` key of your `app/config/app.php` fi
 ~~~
 'aliases' => array(
 
-    'KendoDataSource' => 'ericli1018\LaravelKendoUiDatasource\Facade'
+    'KendoDataSource' => 'Ericli1018\LaravelKendoUiDatasource\Facade'
 
 )
 ~~~
