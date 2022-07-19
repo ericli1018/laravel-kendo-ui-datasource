@@ -10,6 +10,6 @@ class Facade extends IlluminateFacade {
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'laravel-kendo-ui-datasource'; }
+    protected static function getFacadeAccessor() { return DataSourceManager::class; }
 
 }
