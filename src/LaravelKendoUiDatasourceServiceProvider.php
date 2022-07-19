@@ -14,7 +14,7 @@ class LaravelKendoUiDatasourceServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
-		
+		$this->offerPublishing();
 	}
 
 	/**
@@ -24,6 +24,11 @@ class LaravelKendoUiDatasourceServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->mergeConfigFrom(
+            __DIR__ . '/config/config.php',
+            'laravel-kendo-ui-datasource'
+        );
+
 		$this->app->singleton(DataSourceManager::class, function($app) {
 			return new DataSourceManager($app);
 		});
@@ -39,4 +44,19 @@ class LaravelKendoUiDatasourceServiceProvider extends ServiceProvider {
 		return array();
 	}
 
+	/**
+	 * Offer publishing.
+	 *
+	 * @return null
+	 */
+	protected function offerPublishing() {
+		if (! function_exists('config_path')) {
+            // function not available and 'publish' not relevant in Lumen
+            return;
+        }
+
+		$this->publishes([
+            __DIR__ . '/config/config.php' => config_path('laravel-kendo-ui-datasource.php'),
+        ], 'config');
+	}
 }

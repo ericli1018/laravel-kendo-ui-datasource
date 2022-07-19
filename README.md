@@ -43,7 +43,7 @@ $kendoUIDS = KendoDataSource::make(
 	// , 'main_table_name'
 );
 
-$query = User::newQuery();
+$query = (new App\Models\User())->newQuery();
 $count = $kendoUIDS->execute($query);
 // Option column name for count
 // $count = $kendoUIDS->execute($query, 'column name');

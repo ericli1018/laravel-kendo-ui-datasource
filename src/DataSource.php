@@ -43,8 +43,8 @@ class DataSource
 		$this->input = $input;
 		$this->columns = $columns;
 		$this->table_name = $table_name === null ? '' : $table_name . '.';
-		$this->sortKey = $this->app->offsetGet('config')->get('laravel-kendo-ui-datasource::sortKey');
-		$this->filterKey = $this->app->offsetGet('config')->get('laravel-kendo-ui-datasource::filterKey');
+		$this->sortKey = config('laravel-kendo-ui-datasource.sortKey');
+		$this->filterKey = config('laravel-kendo-ui-datasource.filterKey');
 	}
 
 	private function sort($query, $d)
