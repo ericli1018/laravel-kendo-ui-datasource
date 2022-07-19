@@ -30,7 +30,10 @@
         "laravel": {
             "providers": [
                 "Ericli1018\\LaravelKendoUiDatasource\\LaravelKendoUiDatasourceServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "KendoDataSource": "Ericli1018\\LaravelKendoUiDatasource\\Facade"
+            }
        }
     },
     "minimum-stability": "dev",
