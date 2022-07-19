@@ -24,7 +24,7 @@ class LaravelKendoUiDatasourceServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->singleton(DataSourceManager::class, function($container) {
+		$this->app['laravel-kendo-ui-datasource'] = $this->app->singleton(DataSourceManager::class, function($container) {
 			return new DataSourceManager($container);
 		});
 	}

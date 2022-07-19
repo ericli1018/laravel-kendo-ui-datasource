@@ -1,7 +1,7 @@
 Laravel Kendo UI DataSource
 ===========================
 
-ESSENTIALLY ALL WORK ON THIS PROJECT WAS ORIGINALLY DONE BY USER meowcakes.  I HAVE FORKED THIS FROM websolutionmw MERELY TO GIVE MYSELF CONTROL OVER THE DEPENDENCY VERSIONS.  I TAKE NO CREDIT OR RESPONSIBILITY FOR THE ORIGINAL SCRIPTS, OTHER THAN THE TRIVIAL ADJUSTMENTS I HAVE MADE.
+ESSENTIALLY ALL WORK ON THIS PROJECT WAS ORIGINALLY DONE BY USER meowcakes.  I HAVE FORKED THIS FROM ChemProf MERELY TO GIVE MYSELF CONTROL OVER THE DEPENDENCY VERSIONS.  I TAKE NO CREDIT OR RESPONSIBILITY FOR THE ORIGINAL SCRIPTS, OTHER THAN THE TRIVIAL ADJUSTMENTS I HAVE MADE.
 
 Server side Kendo UI DataSource implementation for Laravel
 
@@ -13,7 +13,7 @@ Server side Kendo UI DataSource implementation for Laravel
 To get the latest version simply require it in your `composer.json` file.
 
 ~~~
-"ericli1018/laravel-kendo-ui-datasource": "main-dev"
+"ericli1018/laravel-kendo-ui-datasource": "dev-main"
 ~~~
 
 You can register the facade in the `aliases` key of your `app/config/app.php` file.
@@ -21,7 +21,7 @@ You can register the facade in the `aliases` key of your `app/config/app.php` fi
 ~~~
 'aliases' => array(
 
-    'KendoDataSource' => 'Ericli1018\LaravelKendoUiDatasource\Facade'
+    'KendoDataSource' => 'Ericli1018\LaravelKendoUiDatasource\Facade',
 
 )
 ~~~
