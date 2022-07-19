@@ -14,7 +14,7 @@ class LaravelKendoUiDatasourceServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
-		$this->package('ericli1018/laravel-kendo-ui-datasource');
+		
 	}
 
 	/**
