@@ -22,7 +22,7 @@
         "mockery/mockery": "dev-master"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Ericli1018\\LaravelKendoUiDatasource\\": "src/"
         }
     },
