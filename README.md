@@ -29,6 +29,7 @@ To get the latest version simply require it in your `composer.json` file.
 ~~~
 
 (Optional) You can register the facade in the `aliases` key of your `app/config/app.php` file.
+Default alias is "KendoDataSource".
 
 ~~~
 'aliases' => array(
@@ -40,7 +41,7 @@ To get the latest version simply require it in your `composer.json` file.
 
 ```php
 $kendoUIDS = KendoDataSource::make(
-	Input::all(),
+	$request->all(),
 	[
 		// (Optional) specifying table, join table or table alias for query.
 		// 'email' => ['string', 'join_table_name'],
@@ -48,9 +49,9 @@ $kendoUIDS = KendoDataSource::make(
 		'name' => 'string',
 		'created_at' => 'date',
 		'fully_registered' => 'boolean',
-	]
+	],
 	// Option main table name for query
-	// , 'main_table_name'
+	// 'main_table_name'
 );
 $query = (new App\Models\User())->newQuery();
 $count = $kendoUIDS->execute($query);
@@ -62,7 +63,8 @@ return ['data' => $query->get()->toArray(), 'total' => $count];
 ### Example with Table Alias
 
 ```php
-$kendoUIDS = KendoDataSource::make($request->all(),
+$kendoUIDS = KendoDataSource::make(
+	$request->all(),
 	[
 		'id' => ['number', 'm'],
 		'email' => ['string'],
